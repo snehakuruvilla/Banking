@@ -4,6 +4,6 @@ import com.banking.bean.Customer;
 
 public interface CustomerService {
 
-	public Customer checkCustomer(int customerId);
+	public Customer getUser(int customerId);
 
 }

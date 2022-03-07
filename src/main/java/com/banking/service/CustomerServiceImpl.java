@@ -19,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 	CustomerRepository customerRepository;
 
 	@Override
-	public Customer checkCustomer(int customerId) {
+	public Customer getUser(int customerId) {
 		log.info("Entering the checkCustomer of CustomerServiceImpl class!!");
 		log.debug("Checking if CustomerId is available in the db!!");
 		Optional<Customer> c = customerRepository.findById(customerId);

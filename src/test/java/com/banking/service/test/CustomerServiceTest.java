@@ -1,10 +1,6 @@
 package com.banking.service.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doReturn;
-
-import java.util.Optional;
-
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.banking.bean.Account;
 import com.banking.bean.Customer;
 import com.banking.repo.CustomerRepository;
 import com.banking.service.CustomerServiceImpl;
@@ -36,7 +33,7 @@ public class CustomerServiceTest {
 
 	@BeforeEach
 	public void setup() {
-		customer.setCustomerId(111);
+		customer.setCustId(111);
 		customer.setCustomerName("TestName1");
 	}
 
@@ -45,8 +42,8 @@ public class CustomerServiceTest {
 
 		int customerId = 111;
 		//doReturn(Optional.of(customer)).when(customerRepository).findById(customerId);
-		Customer c = customerService.checkCustomer(customerId);
-		Assertions.assertEquals(customer.getCustomerId(),c.getCustomerId());
+		Customer c = customerService.getUser(customerId);
+		Assertions.assertEquals(customer.getCustId(),c.getCustId());
 		Assertions.assertEquals(customer.getCustomerName(),c.getCustomerName());
 	}
 	
@@ -55,7 +52,7 @@ public class CustomerServiceTest {
 
 		int customerId = 345;
 		//doReturn(Optional.of(customer)).when(customerRepository).findById(customerId);
-		Customer c = customerService.checkCustomer(customerId);
+		Customer c = customerService.getUser(customerId);
 		Assertions.assertEquals(null,c);
 	}
 	

@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,26 +24,25 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute Customer customer) {
-		log.info("Entering into save method of HomeController!");
-			        
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	public ModelAndView getUser(int custId) {
+		log.info("Checking whether customer exists or not for the customer ID "+custId);
 		ModelAndView modelAndView = new ModelAndView();
-
+			        
 		try {
-			log.trace("Customer id :",customer.getCustomerId());
-			Customer cust = customerService.checkCustomer(customer.getCustomerId());
+			log.trace("Customer id : "+custId);
+			Customer cust = customerService.getUser(custId);
 			if (cust != null) {
-				modelAndView.setViewName("user-data");
+				modelAndView.setViewName("userData");
 				modelAndView.addObject("customer", cust);
 			} else {
 				modelAndView.setViewName("home");
-				modelAndView.addObject("customer", cust);
+				modelAndView.addObject("errorMessage","Customer ID is Invalid");
 			}
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
-		log.info("Exiting from save method of HomeController!");
+		log.info("Done with checking whether the customer exists or not");
 		return modelAndView;
 	}
 

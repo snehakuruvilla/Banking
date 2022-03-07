@@ -1,0 +1,36 @@
+<html xmlns:th="https://thymeleaf.org">    
+<body>
+<table>    
+<tr>    
+<td><h4>Customer Id: </h4></td>    
+<td><h4 th:text="${customer.custId}"></h4></td>    
+</tr>       
+<tr>    
+<td><h4>Customer Name: </h4></td>  
+<td><h4 th:text="${customer.customerName}"></h4></td>    
+</tr>   
+</table> 
+<form>
+ <input type="button" value="Go back!" onclick="history.back()">
+</form> 
+<span style="float:middle;">
+    <form action='account' th:object="${customer}" method='POST'>
+        <label for="amount">Credit Amount</label>
+        <input type="text" id="amount" name="amount" required><br><br>  
+        <input type="text" th:value="*{custId}" th:field="*{custId}" hidden/>
+        <input type="text" th:value="*{customerName}" th:field="*{customerName}" hidden/>    
+        <input type="text" th:value="*{customerSurname}" th:field="*{customerSurname}" hidden/>     
+        <input type='submit' value='Create CurrentAccount'/>      
+    </form>   
+</span>
+<tr>
+<td></td>
+</tr>
+<span style="float:left;">
+    <form action='transaction' th:object="${customer}" method='POST'>     
+        <input type="text" th:value="*{custId}" th:field="*{custId}" hidden/>
+        <input type='submit' value='Details of Customer'/> 
+    </form>
+</span>  
+</body>
+</html>  
