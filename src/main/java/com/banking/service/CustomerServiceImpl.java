@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import com.banking.bean.Customer;
 import com.banking.repo.CustomerRepository;
 
+/**
+ * This service class is to deal with the customer details
+ *
+ */
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -19,14 +23,9 @@ public class CustomerServiceImpl implements CustomerService {
 	CustomerRepository customerRepository;
 
 	@Override
-	public Customer getUser(int customerId) {
-		log.info("Entering the checkCustomer of CustomerServiceImpl class!!");
-		log.debug("Checking if CustomerId is available in the db!!");
-		Optional<Customer> c = customerRepository.findById(customerId);
-		if (c.isPresent())
-			return c.get();
-		else
-			return null;
+	public Optional<Customer> getUser(int customerId) {
+		log.info("Checking if customer exists!!");
+		return customerRepository.findById(customerId);
 	}
 
 }

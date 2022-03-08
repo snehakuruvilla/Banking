@@ -7,10 +7,10 @@
 <body style="background-image: url('/templates/images/Background.jpg');   background-repeat: no-repeat;">  
 <div class="card">
       <div class="card-style">
-        <i class="checkmark">Yes</i>
+        <i class="checkmark">No</i>
       </div>
-        <h1>Success</h1> 
-        <p th:text="${customer.custId}"><br/></p><p>Current Account Successfully Created!!</p>
+        <h1>Oops</h1> 
+        <p th:text="${errorMessage}"><br/></p>
         <br><br>
         <form>
 								<input class="button-design" type="button" value="Back"

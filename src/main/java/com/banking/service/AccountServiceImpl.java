@@ -1,8 +1,5 @@
 package com.banking.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.banking.bean.Account;
 import com.banking.repo.AccountRepository;
 
+/**
+ * Service class to deal with the account and transactions
+ *
+ */
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -19,21 +20,20 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	AccountRepository accountRepository;
 
+	/**
+	 * This method is used to check wether the user have a current account
+	 */
 	@Override
 	public boolean checkCurrentAccount(int customerId) throws Exception {
-		log.info("Entering the checkCurrentAccount of AccountServiceImpl class!!");
-		log.debug("Checking if Customer has current Account!!");
 		boolean flag = false;
 		try {
 			Account account = accountRepository.findAccountsByCustomerNative(customerId);
-			if (account!=null)
-				flag = false;
-			else
+			if (account != null)
 				flag = true;
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
-		log.info("Exiting the checkCurrentAccount of AccountServiceImpl class!!");
+		log.info("Current account exists - "+flag);
 		return flag;
 	}
 
@@ -43,15 +43,14 @@ public class AccountServiceImpl implements AccountService {
 		log.debug("Creating current Account for the customer!!");
 		Account account = null;
 		try {
-			accountRepository.insertAccountNative(customerId,"C", amount);
+			accountRepository.insertAccountNative(customerId, "C", amount);
 			account = accountRepository.findAccountsByCustomerNative(customerId);
-			
+
 		} catch (Exception e) {
-			e.printStackTrace();
 			log.error(e.toString());
 		}
+		log.info("Exiting the createAccount of AccountServiceImpl class!!");
 		return account;
 	}
-
 
 }

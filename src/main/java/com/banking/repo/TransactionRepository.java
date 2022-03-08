@@ -18,5 +18,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	void insertTransactionNative(@Param("custId") int customerId, @Param("accountId") int accountId,
 			@Param("fromAccount") String fromAccount, @Param("description") String desc, @Param("amount") long amount);
 
-	
+	@Query(value = "SELECT t FROM Transaction t WHERE t.customer.custId = ?1", nativeQuery = false)
+	List<Transaction> findTransDetailsNative(int customerId);
 }

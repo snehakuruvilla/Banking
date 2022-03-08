@@ -1,26 +1,19 @@
 package com.banking.service.test;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import com.banking.bean.Account;
 import com.banking.bean.Customer;
 import com.banking.repo.CustomerRepository;
 import com.banking.service.CustomerServiceImpl;
+import com.banking.test.BaseTest;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@TestInstance(Lifecycle.PER_CLASS)
-public class CustomerServiceTest {
+public class CustomerServiceTest extends BaseTest{
 
 	@Autowired
 	private CustomerServiceImpl customerService;
@@ -33,7 +26,7 @@ public class CustomerServiceTest {
 
 	@BeforeEach
 	public void setup() {
-		customer.setCustId(111);
+		customer.setCustId(1);
 		customer.setCustomerName("TestName1");
 	}
 
@@ -41,10 +34,11 @@ public class CustomerServiceTest {
 	public void testCheckCustomerSuccess() throws Exception {
 
 		int customerId = 111;
-		//doReturn(Optional.of(customer)).when(customerRepository).findById(customerId);
-		Customer c = customerService.getUser(customerId);
-		Assertions.assertEquals(customer.getCustId(),c.getCustId());
-		Assertions.assertEquals(customer.getCustomerName(),c.getCustomerName());
+		Optional<Customer> c = customerService.getUser(customerId);
+		Assertions.assertTrue(c.isPresent());
+		Customer customer = c.get();
+		Assertions.assertEquals(customer.getCustId(),customer.getCustId());
+		Assertions.assertEquals(customer.getCustomerName(),customer.getCustomerName());
 	}
 	
 	@Test
@@ -52,8 +46,8 @@ public class CustomerServiceTest {
 
 		int customerId = 345;
 		//doReturn(Optional.of(customer)).when(customerRepository).findById(customerId);
-		Customer c = customerService.getUser(customerId);
-		Assertions.assertEquals(null,c);
+		Optional<Customer> c = customerService.getUser(customerId);
+		Assertions.assertFalse(c.isPresent());
 	}
 	
 	

@@ -1,27 +1,52 @@
 <html xmlns:th="https://thymeleaf.org">
-<head>    
-<title>Index Page</title>    
-</head>    
-<body> 
+<head>
+<title>Index Page</title>
+</head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/templates/static/css/style.css}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body style="background-image: url('/templates/images/Background.jpg');  background-repeat: no-repeat;">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-<style>
-    .error {
-        color: red;
-    }
-</style>
+	<script type="text/javascript">
+$(function() {
+    $('#custId').on('keypress', function(e) {
+        if (e.which == 32){
+            console.log('Space Detected');
+            return false;
+        }
+    });
+});
+</script>
+	<div class="register-photo">
+		<div class="form-container">
+			<form class="login-form" action="user" method="GET">
+				<div class="text-center">
+					<img src="/templates/images/logo.png" width="90">
+				</div>
+				<h1 class="text-center">
+					<strong> WELCOME </strong>
+				</h1>
+				<h3 class="text-center">
+					<strong> Sign In </strong>
+				</h3>
+				<div class="form-group">
+					<div class="text-center">
+						<input type="text" class="form-control" name="custId" id="custId"
+							placeholder="Enter Customer ID" required></input>
+						<p class="error"
+							th:text="${#strings.defaultString(errorMessage,'')}"></p>
+					</div>
 
-	<form action="user" method="post">    
-		<table>    
-			<tr>    
-				<td><label for="Customer_Id">Customer ID</label></td>    
-				<td><input type="text" name="custId" id="custId" required></input><p th:text="${#strings.defaultString(errorMessage,'')}" class="error"></p></td>    
-			</tr>   
-			<tr>    
-				<td></td>    
-				<td><input type="submit" value="Submit"></input></td>   
-			</tr>    
-		</table>    
-	</form>
-	
-</body>    
-</html>  
+					<div class="text-center">
+						<input type="submit"
+							class="form-control btn btn-primary"
+							value="Submit"></input>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>
