@@ -1,0 +1,44 @@
+body {
+    background: #275f8e;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #275f8e;
+}
+
+.profile-button {
+    background: #275f8e;
+    box-shadow: none;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.profile-button:hover {
+    background: #275f8e;
+}
+
+.profile-button:focus {
+    background: #275f8e;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #275f8e;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #275f8e;
+    cursor: pointer
+}
+
+.text-font{
+	font-family: "Times New Roman", Times, serif;
+}
+
+::placeholder{
+	font-family: "Times New Roman", Times, serif;
+}

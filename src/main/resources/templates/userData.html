@@ -1,0 +1,75 @@
+<html xmlns:th="https://thymeleaf.org">
+<body style="background-image: url('/templates/images/Background.jpg'); background-repeat: no-repeat;">
+
+	<link rel="stylesheet" type="text/css" th:href="@{/templates/static/css/bs/bootstrap.min.css}">
+
+	<link rel="stylesheet" type="text/css" th:href="@{/templates/static/css/styleUser.css}">
+
+	<div class="container rounded bg-white mt-5">
+		<div class="row">
+			<div class="col-md-4 border-right">
+				<div
+					class="d-flex flex-column align-items-center text-center p-3 py-5">
+					<img class="rounded-circle mt-5" src="/templates/images/profile.jpg" width="170"> 
+					<span class="font-weight-bold"><h7 class="text-font" th:text="${customer.custId}"></h7>
+					</span>
+					<h7 class="text-font" th:text="${customer.customerName}"></h7>
+					<span class="text-black-50"> </span>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="p-3 py-5">
+					<br>
+					<div class="row mt-2">
+						<form action='transaction' th:object="${customer}" method='GET'>
+							<table>
+								<tr>
+									<td class="text-font"><h7>Please find the Customer Details by clicking
+										Details</h7></td>
+								</tr>
+							</table>
+							<div class="col-md-6">
+								<input type="text" th:value="*{custId}" th:field="*{custId}"
+									hidden />
+								<div class="col-md-6">
+									<input class="btn btn-primary profile-button" type='submit'
+										value='Details' />
+						</form>
+					</div>
+
+					<div class="row mt-3">
+
+						<form action='account' th:object="${customer}" method='POST'>
+							<table>
+								<tr>
+									<td class="text-font"><h7>Please create current Account by clicking
+										Create</h7></td>
+								</tr>
+							</table>
+							<div class="col-md-6">
+								<input type="number" min="1" class="form-control"
+									placeholder="Enter the initial Credit" id="amount"
+									name="amount" required>
+							</div>
+							<input type="text" th:value="*{custId}" th:field="*{custId}"
+								hidden /> <input type="text" th:value="*{customerName}"
+								th:field="*{customerName}" hidden /> <input type="text"
+								th:value="*{customerSurname}" th:field="*{customerSurname}"
+								hidden /> <br>
+							<div class="col-md-6">
+								<input class="btn btn-primary profile-button" type='submit'
+									value='Create' />
+						</form>
+					</div>
+					<br> <br> <br>
+
+					<div class="mt-5 text-right">
+						<button class="btn btn-primary profile-button"
+							onclick="history.back()" type="button">Back</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
