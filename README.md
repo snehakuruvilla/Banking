@@ -38,6 +38,11 @@ transactions of the accounts.
 * $ run as spring boot app
 * $ application will be available in: localHost:8080/
 
+######Following are the Test CustomerID
+* 111
+* 122
+* 133
+
 #####Table Details:
 
 * CUSTOMER --> To store the existing users
