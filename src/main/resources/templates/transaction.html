@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+</head>
+<body style="background-image: url('/templates/images/Background.jpg');   background-repeat: no-repeat;">
+	<link rel="stylesheet" type="text/css" th:href="@{/templates/static/css/styleDetails.css}">
+	
+	<div class="page-content page-container" id="page-content">
+		<div class="padding">
+			<div class="row container d-flex justify-content-center">
+				<div class="col-lg-8 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+
+							<div class="table-responsive">
+								<table>
+									<tr>
+										<td><h5>CUSTOMER ID :</h5></td>
+										<td><h5 th:text="${tranList[0].customer.custId}"></h5></td>
+									</tr>
+									<tr>
+										<td><h5>FIRST NAME :</h5></td>
+										<td><h5 th:text="${tranList[0].customer.customerName}"></h5></td>
+									</tr>
+									<tr>
+										<td><h5>LAST NAME :</h5></td>
+										<td><h5 th:text="${tranList[0].customer.customerSurname}"></h5></td>
+									</tr>
+
+
+									<div th:each="e : ${balanceMap}">
+										<div th:switch="${e.key}">
+											<td style="font-size: 13px; font-weight: bold; " th:case='S'>SAVINGS
+												ACCOUNT BALANCE:</td>
+											<td style="font-size: 13px; font-weight: bold; border-collapse: collapse;" th:case='C'>CURRENT
+												ACCOUNT BALANCE:</td>
+											<td style="font-size: 13px; font-weight: bold;"
+												th:text="${e.value}"></td>
+
+									</div> 
+									
+								</table>
+							</div>
+
+							<div class="row">
+								<div class="col-md-8">
+									<span class="card-title"><h4>TRANSACTION DETAILS</h4></span>
+									<p class="card-description">S--> Savings Account C-->
+										Current Account</p>
+								</div>
+							</div>
+							<br> <br>
+							<div class="table-responsive">
+								<table id="htmltable" class="table">
+									<thead>
+										<tr>
+											<th><h4>Transaction ID</h4></th>
+											<th><h4>Account ID</h4></th>
+											<th><h4>Account Type</h4></th>
+											<th><h4>Description</h4></th>
+											<th><h4>Amount</h4></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="transaction: ${tranList}">
+											<th th:text="${transaction.transactionId}" />
+											<th th:text="${transaction.account.accountId}" />
+											<th th:text="${transaction.account.accountType}" />
+											<th th:text="${transaction.description}" />
+											<th th:text="${transaction.amount}" />
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+							<br> <br>
+
+							<form>
+								<input class="button-design" type="button" value="Go back!"
+									onclick="history.back()">
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
