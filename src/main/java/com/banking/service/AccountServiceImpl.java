@@ -33,7 +33,7 @@ public class AccountServiceImpl implements AccountService {
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
-		log.info("Current account exists - "+flag);
+		log.info("Current account exists - {}.",flag);
 		return flag;
 	}
 

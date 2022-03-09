@@ -2,14 +2,12 @@ package com.banking.controller;
 
 import java.util.Optional;
 
-
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banking.bean.Customer;
@@ -46,13 +44,13 @@ public class HomeController {
 	 * @param custId
 	 * @return
 	 */
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@GetMapping(value = "/user")
 	public ModelAndView getUser(int custId) {
-		log.info("Checking whether customer exists or not for the customer ID " + custId);
+		log.info("Checking whether customer exists or not for the customer ID {}." ,custId);
 		ModelAndView modelAndView = new ModelAndView();
 
 		try {
-				log.info("Customer id : " + custId);
+				log.info("Customer id : {}." ,custId);
 				Optional<Customer> cust = customerService.getUser(custId);
 				if (cust.isPresent()) {
 					log.info("Customer exists, redirecting user details page");

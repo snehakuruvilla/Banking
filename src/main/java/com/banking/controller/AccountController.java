@@ -7,9 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banking.bean.Account;
@@ -42,7 +42,7 @@ public class AccountController {
 	 * @param amount
 	 * @return
 	 */
-	@RequestMapping(value = "/account", method = RequestMethod.POST)
+	@PostMapping(value = "/account")
 	public ModelAndView createCurrentAccount(@ModelAttribute Customer customer, long amount) {
 		log.info("Checking whether the user already have a current account!!");
 
@@ -50,19 +50,19 @@ public class AccountController {
 		try {
 			if (customer != null && amount > 0) {
 				int custId = customer.getCustId();
-				log.info("Customer ID " + custId);
-				log.info("amount " + amount);
+				log.info("Customer ID {}." ,custId);
+				log.info("amount {}." ,amount);
 
 				boolean currentAccountExists = accountService.checkCurrentAccount(custId);
 				if (!currentAccountExists) {
-					log.info("Creating current account for customer - "+custId);
+					log.info("Creating current account for customer - {}.",custId);
 					
 					Account account = accountService.createAccount(custId, amount);
 					transactionService.createCurrentAccount(custId, amount, account.getAccountId());
 					modelAndView.setViewName("account");
 					modelAndView.addObject("customer", customer);
 					
-					log.info("Current account created with account ID - "+account.getAccountId()+" and inserted to transaction table");
+					log.info("Current account created with account ID - {}. and inserted to transaction table" ,account.getAccountId());
 				} else {
 					modelAndView.setViewName("accountCreated");
 					modelAndView.addObject("errorMessage", "Current Account already exists for this customer");
@@ -80,7 +80,7 @@ public class AccountController {
 	 * @param customer
 	 * @return
 	 */
-	@RequestMapping(value = "/transaction", method = RequestMethod.GET)
+	@GetMapping(value = "/transaction")
 	public ModelAndView displayCustomerDetails(@ModelAttribute Customer customer) {
 		log.info("Getting transaction details");
 
@@ -88,10 +88,10 @@ public class AccountController {
 
 		try {
 			if (customer != null) {
-				log.info("Customer id : " + customer.getCustId());
+				log.info("Customer id : {}." ,customer.getCustId());
 
 				List<Transaction> tranList = transactionService.findAllTransactionsByCustomer(customer.getCustId());
-				log.info("Number of transactions for the user - "+tranList.size());
+				log.info("Number of transactions for the user - {}.",tranList.size());
 				
 				if (tranList != null && !tranList.isEmpty()) {
 					Map<String, Long> balanceMap = transactionService.findBalance(tranList);

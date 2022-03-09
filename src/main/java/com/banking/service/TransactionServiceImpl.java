@@ -31,7 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void createCurrentAccount(int customerId, long amount, int accountId) {
 		try {
-			log.info("Creating current account for the user - "+customerId);
+			log.info("Creating current account for the user - {}.",customerId);
 			transactionRepository.insertTransactionNative(customerId, accountId, "Bank", "Joning Current Account Bonus", amount);
 		} catch (Exception e) {
 			log.error(e.toString());
@@ -43,7 +43,7 @@ public class TransactionServiceImpl implements TransactionService {
 	 */
 	@Override
 	public List<Transaction> findAllTransactionsByCustomer(int customerId) throws Exception {
-		List<Transaction> transList = new ArrayList<Transaction>();
+		List<Transaction> transList = null;
 		
 		try {
 			log.debug("Finding the Transaction details of Customer!");
@@ -60,7 +60,7 @@ public class TransactionServiceImpl implements TransactionService {
 	 */
 	public Map<String, Long> findBalance(List<Transaction> tranList) {
 		log.info("Entering the findBalance of TransactionServiceImpl class!!");
-		HashMap<String, Long> map = new HashMap<String, Long>();
+		HashMap<String, Long> map = new HashMap<>();
 		try {
 			if (tranList != null) {
 				for (Transaction t : tranList) {
