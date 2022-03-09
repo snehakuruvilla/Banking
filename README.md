@@ -51,9 +51,9 @@ transactions of the accounts.
 
 #####The application apis
 
-* GET /v1/user - basic user details 
-* POST /v1/account - creates a new account for existing customer
-* GET /v1/transaction - retrieves the details of users (customer,account,transaction)
+* GET /user - basic user details 
+* POST /account - creates a new account for existing customer
+* GET /transaction - retrieves the details of users (customer,account,transaction)
 
 JUnit test are available.
 Code quality checked using Sonar.
