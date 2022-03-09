@@ -33,8 +33,9 @@ transactions of the accounts.
 #####How to run
 
 * $ import the project Banking
-* $ mvn clean install
-* $ mvn spring-boot:run
+* $ convert to maven
+* $ run as maven build -- clean install
+* $ run as spring boot app
 * $ application will be available in: localHost:8080/
 
 #####Table Details:
